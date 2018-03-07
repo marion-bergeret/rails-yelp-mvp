@@ -1,0 +1,21 @@
+<%= render 'navbar' %>
+
+
+<div class="restaurant-container">
+  <% @restaurants.each do |resto| %>
+  <div><h2 class="name"><%= link_to resto.name, restaurant_path(resto) %></h2>
+    <%= link_to "Edit", edit_restaurant_path(resto)  %>
+    <%= link_to "Delete", restaurant_path(resto), method: :delete, data: { confirm: "Are you sure you wish to delete this restaurant?" }  %>
+    <%= link_to "Add a review", new_restaurant_review_path(resto)  %>
+    <p class="category"><%=resto.category  %> </p>
+    <p class="address"><%=resto.address  %></p>
+    <p class="phone_number"><%=resto.phone_number  %></p>
+  </div>
+  <div class="reviews">
+    <ul><% resto.reviews.each do |review|  %>
+      <li><em><%= review.content  %></em>  - rating: <%= review.rating  %></li>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
+</div>
